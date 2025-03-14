@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server';
 import { mockJobs } from "@/data/mock/companies";
+import { type NextRequest } from 'next/server';
 
 // Helper function to get base URL
 function getBaseUrl() {
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 }
 
+// Use the proper Next.js 15+ route handler type signature
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id;
+  const  id  = params.id;
   
   try {
     const baseUrl = getBaseUrl();

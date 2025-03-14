@@ -53,7 +53,7 @@ export async function fetchUsers() {
 export async function fetchUsersByCompany(companyId: string) {
   try {
     const baseUrl = getBaseUrl();
-    const response = await fetch(`${baseUrl}/api/companies/${companyId}/users`);
+    const response = await fetch(`${baseUrl}/api/v1/companies/${companyId}/users`);
     if (!response.ok) throw new Error('Failed to fetch');
     return await response.json();
   } catch (error) {
