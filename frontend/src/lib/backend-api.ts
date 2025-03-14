@@ -1,6 +1,3 @@
-/**
- * Direct backend API integration module
- */
 import { mockCompanies, mockUsers, mockJobs } from "@/data/mock/companies";
 
 // Backend API configuration
@@ -12,9 +9,7 @@ const API_CONFIG = {
   }
 };
 
-/**
- * Generic function to fetch data from the backend API
- */
+
 async function fetchFromBackend<T>(endpoint: string, fallback: any, options = {}): Promise<T> {
   try {
     const url = `${API_CONFIG.baseUrl}${endpoint}`;

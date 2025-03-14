@@ -9,7 +9,7 @@ export default async function Home() {
   const companies: Company[] = await fetchCompanies();
   const users: User[] = await fetchUsers();
   
-  // Filter to show only CEOs for the featured section
+  
   const featuredCEOs = users.filter((user) => user.position.includes("CEO"));
 
   return (

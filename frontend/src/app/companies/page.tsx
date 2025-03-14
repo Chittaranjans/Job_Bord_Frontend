@@ -17,7 +17,7 @@ export default async function CompaniesPage() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <h1 className="text-3xl font-bold">Companies</h1>
           <div className="w-full md:w-64">
-            {/* Add search component here if needed */}
+        
           </div>
         </div>
 

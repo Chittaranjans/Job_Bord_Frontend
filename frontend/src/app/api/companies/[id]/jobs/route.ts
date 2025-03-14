@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server';
 import { mockJobs } from "@/data/mock/companies";
 import { type NextRequest } from 'next/server';
 
-// Helper function to get base URL
+
 function getBaseUrl() {
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 }
 
-// Use the proper Next.js 15+ route handler type signature
+
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
@@ -16,7 +16,6 @@ export async function GET(
   
   try {
     const baseUrl = getBaseUrl();
-    // First check if company-specific endpoint exists in your API
     const response = await fetch(`${baseUrl}/api/v1/companies/${id}/jobs`, {
       next: { revalidate: 60 }
     });
@@ -26,7 +25,7 @@ export async function GET(
       return NextResponse.json(data);
     }
     
-    // If company-specific endpoint fails, get all jobs and filter
+    
     const allJobsResponse = await fetch(`${baseUrl}/api/v1/jobs`, {
       next: { revalidate: 60 }
     });

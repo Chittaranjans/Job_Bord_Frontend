@@ -1,14 +1,14 @@
 // src/lib/api.ts
 import { mockCompanies, mockUsers, mockJobs } from "@/data/mock/companies";
 
-// Helper function to get the base URL for API calls
+
 function getBaseUrl() {
-  // When running on the server, we need to use an absolute URL
+
   if (typeof window === 'undefined') {
-    // When deployed, use the production URL, otherwise use localhost
+  
     return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
   }
-  // In the browser, relative URLs work fine
+
   return '';
 }
 
