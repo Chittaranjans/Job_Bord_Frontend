@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { mockJobs } from "@/data/mock/companies";
 import { type NextRequest } from 'next/server';
-
+export const dynamic = "force-static";
+export const revalidate = false;
 
 function getBaseUrl() {
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
