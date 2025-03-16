@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { mockCompanies } from "@/data/mock/companies";
+export const dynamic = "force-static";
+export const revalidate = false;
 
 export async function GET(
   request: Request,

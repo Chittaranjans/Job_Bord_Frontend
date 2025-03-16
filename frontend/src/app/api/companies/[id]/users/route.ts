@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { mockUsers } from "@/data/mock/companies";
+export const dynamic = "force-static";
+export const revalidate = false;
 
 // Helper function to get base URL
 function getBaseUrl() {
