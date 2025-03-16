@@ -3,18 +3,27 @@ import { fetchCompanyById, fetchUsersByCompany, fetchJobsByCompany } from "@/lib
 import { UserCard } from "../../../components/UserCard";
 import { JobCard } from "../../../components/JobCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Job , User , Company } from "@/types";
-interface CompanyPageParams {
-    params: {
-      id: string;
-    };
-  }
+import { Job, User, Company } from "@/types";
+import { mockCompanies } from "@/data/mock/companies";
 
+// Add this function to generate all possible company IDs at build time
+export async function generateStaticParams() {
+  // Use mock data to generate all possible company IDs
+  return mockCompanies.map(company => ({
+    id: company.id
+  }));
+}
+
+interface CompanyPageParams {
+  params: {
+    id: string;
+  };
+}
 
 export default async function CompanyPage({ params }: CompanyPageParams) {
-  const company:Company = await fetchCompanyById(params.id);
-  const employees:User[] = await fetchUsersByCompany(params.id);
-  const jobs:Job[] = await fetchJobsByCompany(params.id);
+  const company: Company = await fetchCompanyById(params.id);
+  const employees: User[] = await fetchUsersByCompany(params.id);
+  const jobs: Job[] = await fetchJobsByCompany(params.id);
 
   return (
     <div className="container py-8 space-y-8">
