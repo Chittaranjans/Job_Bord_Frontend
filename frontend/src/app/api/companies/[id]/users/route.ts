@@ -20,25 +20,27 @@ export async function GET(
 ) {
   const id = params.id;
   
-  try {
-    const baseUrl = getBaseUrl();
+//   try {
+//     const baseUrl = getBaseUrl();
     
-    // Get all profiles and filter by company_id
-    const response = await fetch(`${baseUrl}/api/v1/profiles`, {
-      next: { revalidate: 60 }
-    });
+//     // Get all profiles and filter by company_id
+//     const response = await fetch(`${baseUrl}/api/v1/profiles`, {
+//       next: { revalidate: 60 }
+//     });
     
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`API error: ${response.status}`);
+//     }
     
-    const users = await response.json();
-    const filteredUsers = users.filter((user: { company_id: string }) => String(user.company_id) === String(id));
+//     const users = await response.json();
+//     const filteredUsers = users.filter((user: { company_id: string }) => String(user.company_id) === String(id));
     
-    return NextResponse.json(filteredUsers);
-  } catch (error) {
-    console.error(`Error fetching users for company ${id}, using mock data:`, error);
-    const users = mockUsers.filter(user => user.company_id === id);
-    return NextResponse.json(users);
-  }
+//     return NextResponse.json(filteredUsers);
+//   } catch (error) {
+//     console.error(`Error fetching users for company ${id}, using mock data:`, error);
+//     const users = mockUsers.filter(user => user.company_id === id);
+//     return NextResponse.json(users);
+//   }
+// } 
+
 }
