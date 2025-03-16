@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server';
-import { mockJobs } from "@/data/mock/companies";
+import { mockJobs , mockCompanies} from "@/data/mock/companies";
 import { type NextRequest } from 'next/server';
 export const dynamic = "force-static";
 export const revalidate = false;
-
+export async function generateStaticParams() {
+  // Use your mock data to generate all possible company IDs
+  return mockCompanies.map(company => ({
+    id: company.id
+  }));
+}
 function getBaseUrl() {
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 }
