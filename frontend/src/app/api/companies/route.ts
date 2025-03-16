@@ -2,20 +2,31 @@ import { NextResponse } from 'next/server';
 import { mockCompanies } from "@/data/mock/companies";
 export const dynamic = "force-static";
 export const revalidate = false;
-export async function generateStaticParams() {
-  // Use your mock data to generate all possible company IDs
-  return mockCompanies.map(company => ({
-    id: company.id
-  }));
-}
-// Helper function to get base URL
+
 function getBaseUrl() {
-  return process.env.NEXT_PUBLIC_API_URL ;
+  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+    return null; // Always use mock data during build
+  }
+  // Get the API URL from environment variables
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  
+  // If there's no URL configured, return null to signal use of mock data
+  if (!apiUrl || apiUrl.trim() === '') {
+    return null;
+  }
+  
+  return apiUrl;
 }
 
 export async function GET() {
+  const baseUrl = getBaseUrl();
+  
+  // For static export or if no API URL is configured, use mock data immediately
+  if (baseUrl === null) {
+    return NextResponse.json(mockCompanies);
+  }
+  
   try {
-    const baseUrl = getBaseUrl();
     const response = await fetch(`${baseUrl}/api/v1/companies`, {
       next: { revalidate: 60 }
     });
