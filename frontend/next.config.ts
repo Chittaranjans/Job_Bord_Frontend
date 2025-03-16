@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   output: "standalone",
+  // Enable static exports for better Amplify compatibility
+  images: {
+    unoptimized: true, // Required for static export
+  },
   // Add rewrites to handle API paths
   async rewrites() {
     return [
@@ -17,7 +21,9 @@ const nextConfig: NextConfig = {
     ]
   },
   // Add trailing slash for better compatibility with AWS Amplify
-  trailingSlash: true
+  trailingSlash: true,
+  // Add server output path for better static compatibility
+  distDir: '.next',
 };
 
 export default nextConfig;
