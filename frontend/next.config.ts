@@ -4,21 +4,24 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: "standalone",
-  // Enable static exports for better Amplify compatibility
+  // Change from standalone to export for Amplify compatibility
+  output: "export",
+  // Keep images unoptimized for static export
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
-  // Add rewrites to handle API paths
+  // Add rewrites to handle API paths (these work differently with export)
   async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: process.env.NEXT_PUBLIC_API_URL 
-          ? `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`
-          : 'http://localhost:8000/api/:path*'
-      }
-    ]
+    return {
+      beforeFiles: [
+        {
+          source: '/api/:path*',
+          destination: process.env.NEXT_PUBLIC_API_URL 
+            ? `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`
+            : 'http://localhost:8000/api/:path*'
+        }
+      ]
+    }
   },
   // Add trailing slash for better compatibility with AWS Amplify
   trailingSlash: true,

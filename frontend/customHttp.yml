@@ -13,4 +13,3 @@ redirects:
     target: '/index.html'
     status: '200'
     condition: 'notEquals(${path}, '/index.html')'
-    
